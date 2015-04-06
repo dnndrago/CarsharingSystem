@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsharingSystem.Data", "Ca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsharingSystem.Model", "CarsharingSystem.Model\CarsharingSystem.Model.csproj", "{8BD3FC1E-4D41-40B7-9932-AEE2FF9B082E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsharingSystem.WebServices", "CarsharingSystem.WebServices\CarsharingSystem.WebServices.csproj", "{242137C9-D227-4D63-B188-4D43FBDAF73F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8BD3FC1E-4D41-40B7-9932-AEE2FF9B082E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD3FC1E-4D41-40B7-9932-AEE2FF9B082E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BD3FC1E-4D41-40B7-9932-AEE2FF9B082E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242137C9-D227-4D63-B188-4D43FBDAF73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242137C9-D227-4D63-B188-4D43FBDAF73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242137C9-D227-4D63-B188-4D43FBDAF73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242137C9-D227-4D63-B188-4D43FBDAF73F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
