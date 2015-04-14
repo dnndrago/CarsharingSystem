@@ -8,6 +8,8 @@ using Newtonsoft.Json.Serialization;
 
 namespace CarsharingSystem.WebServices
 {
+    using System.Web.OData.Extensions;
+
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -16,6 +18,9 @@ namespace CarsharingSystem.WebServices
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            config.EnableCors();
+            config.AddODataQueryFilter();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
