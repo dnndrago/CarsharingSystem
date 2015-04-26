@@ -1,6 +1,7 @@
 ﻿
 namespace CarsharingSystem.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,8 +14,8 @@ namespace CarsharingSystem.Model
 
         public Driver()
         {
-            this.vehicles = new HashSet<Vehicle>();
-            this.travels = new HashSet<Travel>();
+            this.Vehicles = new HashSet<Vehicle>();
+            this.Travels = new HashSet<Travel>();
         }
 
         public virtual ICollection<Vehicle> Vehicles
@@ -43,5 +44,9 @@ namespace CarsharingSystem.Model
                 this.travels = value;
             }
         }
+
+        public Guid DriversLicenseId { get; set; }
+
+        public virtual DrivingLicense DrivingLicense { get; set; }
     }
 }

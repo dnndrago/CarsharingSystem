@@ -13,14 +13,28 @@ using CarsharingSystem.Data;
 
 namespace CarsharingSystem.WebServices.Controllers
 {
+    [RoutePrefix("api")]
     public class DriverController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ICarsharingData db;
+
+        public DriverController()
+            : this(new CarsharingData())
+        {   
+        }
+
+        public DriverController(ICarsharingData data)
+        {
+            this.db = data;
+        }
 
         // GET api/Driver
-        public IQueryable<Driver> GetUsers()
+        [Authorize]
+        [HttpGet]
+        [Route("Drivers")]
+        public IHttpActionResult GetDrivers()
         {
-            return db.Drivers;
+            return null;
         }
 
     //    // GET api/Driver/5

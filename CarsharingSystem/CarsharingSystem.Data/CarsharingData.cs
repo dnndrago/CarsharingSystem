@@ -14,30 +14,40 @@ namespace CarsharingSystem.Data
 
         private readonly IDictionary<Type, object> repositories;
 
+        public CarsharingData()
+            : this(new ApplicationDbContext())
+        {
+        }
+
         public CarsharingData(DbContext context)
         {
             this.context = context;
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public IRepository<Driver> Drivers
+        public DriverRepository Drivers
         {
-            get { return this.GetRepository<Driver>(); }
+            get { return (DriverRepository)this.GetRepository<Driver>(); }
         }
 
-        public IRepository<Passenger> Passengers
+        public PassengerRepository Passengers
         {
-            get { return this.GetRepository<Passenger>(); }
+            get { return (PassengerRepository)this.GetRepository<Passenger>(); }
         }
 
-        public IRepository<Travel> Travels
+        public TravelRepository Travels
         {
-            get { return this.GetRepository<Travel>(); }
+            get { return (TravelRepository)this.GetRepository<Travel>(); }
         }
 
-        public IRepository<Vehicle> Vehicles
+        public VehicleRepository Vehicles
         {
-            get { return this.GetRepository<Vehicle>(); }
+            get { return (VehicleRepository)this.GetRepository<Vehicle>(); }
+        }
+
+        public DrivingLicenseRepository DrivingLicenses
+        {
+            get { return (DrivingLicenseRepository)this.GetRepository<DrivingLicense>(); }
         }
 
         private IRepository<T> GetRepository<T>() where T : class
@@ -46,10 +56,27 @@ namespace CarsharingSystem.Data
             if (!this.repositories.ContainsKey(type))
             {
                 var typeOfRepository = typeof(GenericRepository<T>);
-                //if (type.IsAssignableFrom(typeof(Game)))
-                //{
-                //    typeOfRepository = typeof(GamesRepository);
-                //}
+
+                if (type.IsAssignableFrom(typeof(Vehicle)))
+                {
+                    typeOfRepository = typeof(VehicleRepository);
+                }
+                else if (type.IsAssignableFrom(typeof(Travel)))
+                {
+                    typeOfRepository = typeof(TravelRepository);
+                }
+                else if (type.IsAssignableFrom(typeof(Driver)))
+                {
+                    typeOfRepository = typeof(DriverRepository);
+                }
+                else if (type.IsAssignableFrom(typeof(Passenger)))
+                {
+                    typeOfRepository = typeof(PassengerRepository);
+                }
+                else if (type.IsAssignableFrom(typeof(DrivingLicense)))
+                {
+                    typeOfRepository = typeof(DrivingLicenseRepository);
+                }
 
                 var repository = Activator.CreateInstance(typeOfRepository, this.context);
                 this.repositories.Add(type, repository);

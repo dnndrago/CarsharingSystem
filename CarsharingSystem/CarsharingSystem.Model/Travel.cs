@@ -15,8 +15,12 @@ namespace CarsharingSystem.Model
 
         public Guid DriverId { get; set; }
 
-        public Driver Driver { get; set; }
+        public virtual Driver Driver { get; set; }
 
-        public ICollection<Passenger> Passengers { get; set; }
+        public virtual ICollection<Passenger> Passengers { get; set; }
+
+        public Guid VehicleId { get; set; }
+
+        public virtual Vehicle Vehicle { get; set; }    
     }
 }

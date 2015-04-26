@@ -6,12 +6,14 @@ namespace CarsharingSystem.Data
 
     public interface ICarsharingData
     {
-        IRepository<Driver> Drivers { get; }
+        DriverRepository Drivers { get; }
 
-        IRepository<Passenger> Passengers { get; }
+        PassengerRepository Passengers { get; }
 
-        IRepository<Travel> Travels { get; }
+        TravelRepository Travels { get; }
 
-        IRepository<Vehicle> Vehicles { get; } 
+        VehicleRepository Vehicles { get; }
+
+        DrivingLicenseRepository DrivingLicenses { get; } 
     }
 }

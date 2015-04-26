@@ -21,10 +21,10 @@ namespace CarsharingSystem.Data
         public IDbSet<Passenger> Passengers { get; set; }
 
         public IDbSet<Travel> Travels { get; set; }
-        
+
         public IDbSet<Vehicle> Vehicles { get; set; }
 
-
+        public IDbSet<DrivingLicense> DrivingLicenses { get; set; }
 
         public static ApplicationDbContext Create()
         {
