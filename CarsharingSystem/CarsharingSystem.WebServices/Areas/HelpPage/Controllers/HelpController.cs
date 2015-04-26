@@ -1,15 +1,21 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using CarsharingSystem.WebServices.Areas.HelpPage.Models;
+using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
+using BugTracker.RestServices.Areas.HelpPage.Models;
 
-namespace CarsharingSystem.WebServices.Areas.HelpPage.Controllers
+namespace BugTracker.RestServices.Areas.HelpPage.Controllers
 {
+    using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
+    using BugTracker.RestServices.Areas.HelpPage.Models;
+
     /// <summary>
     /// The controller that will handle requests for the help page.
     /// </summary>
     public class HelpController : Controller
     {
+        private const string ErrorViewName = "Error";
+
         public HelpController()
             : this(GlobalConfiguration.Configuration)
         {
@@ -39,7 +45,22 @@ namespace CarsharingSystem.WebServices.Areas.HelpPage.Controllers
                 }
             }
 
-            return View("Error");
+            return View(ErrorViewName);
+        }
+
+        public ActionResult ResourceModel(string modelName)
+        {
+            if (!String.IsNullOrEmpty(modelName))
+            {
+                ModelDescriptionGenerator modelDescriptionGenerator = Configuration.GetModelDescriptionGenerator();
+                ModelDescription modelDescription;
+                if (modelDescriptionGenerator.GeneratedModels.TryGetValue(modelName, out modelDescription))
+                {
+                    return View(modelDescription);
+                }
+            }
+
+            return View(ErrorViewName);
         }
     }
 }

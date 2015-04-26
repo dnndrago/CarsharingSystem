@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
-
+﻿
 namespace CarsharingSystem.WebServices
 {
-    using System.Web.OData.Extensions;
+    using System.Web.Http;
+    using Microsoft.Owin.Security.OAuth;
 
     public static class WebApiConfig
     {
@@ -19,8 +13,8 @@ namespace CarsharingSystem.WebServices
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            config.EnableCors();
-            config.AddODataQueryFilter();
+            // Disable the XML media formatter (because it cannot serialize annonymous types)
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

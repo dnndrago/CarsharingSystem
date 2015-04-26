@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
 using System.Web.Mvc;
 
 namespace CarsharingSystem.WebServices.Controllers
@@ -10,9 +7,8 @@ namespace CarsharingSystem.WebServices.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            return View();
+            // Redirect to Web API Help Page (Documentation)
+            return this.Redirect("Help");
         }
     }
 }

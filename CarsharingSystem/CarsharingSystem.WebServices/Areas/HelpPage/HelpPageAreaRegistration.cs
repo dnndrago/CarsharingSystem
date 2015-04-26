@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace CarsharingSystem.WebServices.Areas.HelpPage
+namespace BugTracker.RestServices.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {
