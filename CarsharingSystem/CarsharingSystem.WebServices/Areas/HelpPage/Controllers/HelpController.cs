@@ -1,13 +1,16 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
-using BugTracker.RestServices.Areas.HelpPage.Models;
+using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+using CarsharingSystem.WebServices.Areas.HelpPage.Models;
 
-namespace BugTracker.RestServices.Areas.HelpPage.Controllers
+namespace CarsharingSystem.WebServices.Areas.HelpPage.Controllers
 {
-    using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
-    using BugTracker.RestServices.Areas.HelpPage.Models;
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+    using CarsharingSystem.WebServices.Areas.HelpPage.Models;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage;
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
     /// <summary>
     /// The controller that will handle requests for the help page.

@@ -1,8 +1,8 @@
-using System;
-using System.Reflection;
-
-namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
+namespace CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions
 {
+    using System;
+    using System.Reflection;
+
     public interface IModelDocumentationProvider
     {
         string GetDocumentation(MemberInfo member);

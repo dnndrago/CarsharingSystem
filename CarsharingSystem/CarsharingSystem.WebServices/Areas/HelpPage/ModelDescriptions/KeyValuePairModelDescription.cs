@@ -1,5 +1,7 @@
-namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
+namespace CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions
 {
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+
     public class KeyValuePairModelDescription : ModelDescription
     {
         public ModelDescription KeyModelDescription { get; set; }

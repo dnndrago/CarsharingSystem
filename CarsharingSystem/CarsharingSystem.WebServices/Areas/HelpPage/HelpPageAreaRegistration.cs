@@ -1,8 +1,10 @@
-using System.Web.Http;
-using System.Web.Mvc;
-
-namespace BugTracker.RestServices.Areas.HelpPage
+namespace CarsharingSystem.WebServices.Areas.HelpPage
 {
+    using System.Web.Http;
+    using System.Web.Mvc;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage.App_Start;
+
     public class HelpPageAreaRegistration : AreaRegistration
     {
         public override string AreaName

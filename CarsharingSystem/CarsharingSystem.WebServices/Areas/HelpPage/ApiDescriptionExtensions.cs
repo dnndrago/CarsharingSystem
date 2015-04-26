@@ -1,10 +1,10 @@
-using System;
-using System.Text;
-using System.Web;
-using System.Web.Http.Description;
-
-namespace BugTracker.RestServices.Areas.HelpPage
+namespace CarsharingSystem.WebServices.Areas.HelpPage
 {
+    using System;
+    using System.Text;
+    using System.Web;
+    using System.Web.Http.Description;
+
     public static class ApiDescriptionExtensions
     {
         /// <summary>

@@ -1,18 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Web.Http;
-using System.Web.Http.Description;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
-
-namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
+namespace CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Web.Http;
+    using System.Web.Http.Description;
+    using System.Xml.Serialization;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Generates model descriptions for given types.
     /// </summary>
@@ -93,8 +96,8 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                 throw new ArgumentNullException("config");
             }
 
-            _documentationProvider = new Lazy<IModelDocumentationProvider>(() => config.Services.GetDocumentationProvider() as IModelDocumentationProvider);
-            GeneratedModels = new Dictionary<string, ModelDescription>(StringComparer.OrdinalIgnoreCase);
+            this._documentationProvider = new Lazy<IModelDocumentationProvider>(() => config.Services.GetDocumentationProvider() as IModelDocumentationProvider);
+            this.GeneratedModels = new Dictionary<string, ModelDescription>(StringComparer.OrdinalIgnoreCase);
         }
 
         public Dictionary<string, ModelDescription> GeneratedModels { get; private set; }
@@ -103,7 +106,7 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
         {
             get
             {
-                return _documentationProvider.Value;
+                return this._documentationProvider.Value;
             }
         }
 
@@ -122,7 +125,7 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
 
             ModelDescription modelDescription;
             string modelName = ModelNameHelper.GetModelName(modelType);
-            if (GeneratedModels.TryGetValue(modelName, out modelDescription))
+            if (this.GeneratedModels.TryGetValue(modelName, out modelDescription))
             {
                 if (modelType != modelDescription.ModelType)
                 {
@@ -139,14 +142,14 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                 return modelDescription;
             }
 
-            if (DefaultTypeDocumentation.ContainsKey(modelType))
+            if (this.DefaultTypeDocumentation.ContainsKey(modelType))
             {
-                return GenerateSimpleTypeModelDescription(modelType);
+                return this.GenerateSimpleTypeModelDescription(modelType);
             }
 
             if (modelType.IsEnum)
             {
-                return GenerateEnumTypeModelDescription(modelType);
+                return this.GenerateEnumTypeModelDescription(modelType);
             }
 
             if (modelType.IsGenericType)
@@ -158,7 +161,7 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                     Type enumerableType = typeof(IEnumerable<>).MakeGenericType(genericArguments);
                     if (enumerableType.IsAssignableFrom(modelType))
                     {
-                        return GenerateCollectionModelDescription(modelType, genericArguments[0]);
+                        return this.GenerateCollectionModelDescription(modelType, genericArguments[0]);
                     }
                 }
                 if (genericArguments.Length == 2)
@@ -166,13 +169,13 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                     Type dictionaryType = typeof(IDictionary<,>).MakeGenericType(genericArguments);
                     if (dictionaryType.IsAssignableFrom(modelType))
                     {
-                        return GenerateDictionaryModelDescription(modelType, genericArguments[0], genericArguments[1]);
+                        return this.GenerateDictionaryModelDescription(modelType, genericArguments[0], genericArguments[1]);
                     }
 
                     Type keyValuePairType = typeof(KeyValuePair<,>).MakeGenericType(genericArguments);
                     if (keyValuePairType.IsAssignableFrom(modelType))
                     {
-                        return GenerateKeyValuePairModelDescription(modelType, genericArguments[0], genericArguments[1]);
+                        return this.GenerateKeyValuePairModelDescription(modelType, genericArguments[0], genericArguments[1]);
                     }
                 }
             }
@@ -180,25 +183,25 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
             if (modelType.IsArray)
             {
                 Type elementType = modelType.GetElementType();
-                return GenerateCollectionModelDescription(modelType, elementType);
+                return this.GenerateCollectionModelDescription(modelType, elementType);
             }
 
             if (modelType == typeof(NameValueCollection))
             {
-                return GenerateDictionaryModelDescription(modelType, typeof(string), typeof(string));
+                return this.GenerateDictionaryModelDescription(modelType, typeof(string), typeof(string));
             }
 
             if (typeof(IDictionary).IsAssignableFrom(modelType))
             {
-                return GenerateDictionaryModelDescription(modelType, typeof(object), typeof(object));
+                return this.GenerateDictionaryModelDescription(modelType, typeof(object), typeof(object));
             }
 
             if (typeof(IEnumerable).IsAssignableFrom(modelType))
             {
-                return GenerateCollectionModelDescription(modelType, typeof(object));
+                return this.GenerateCollectionModelDescription(modelType, typeof(object));
             }
 
-            return GenerateComplexTypeModelDescription(modelType);
+            return this.GenerateComplexTypeModelDescription(modelType);
         }
 
         // Change this to provide different name for the member.
@@ -252,13 +255,13 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
         private string CreateDefaultDocumentation(Type type)
         {
             string documentation;
-            if (DefaultTypeDocumentation.TryGetValue(type, out documentation))
+            if (this.DefaultTypeDocumentation.TryGetValue(type, out documentation))
             {
                 return documentation;
             }
-            if (DocumentationProvider != null)
+            if (this.DocumentationProvider != null)
             {
-                documentation = DocumentationProvider.GetDocumentation(type);
+                documentation = this.DocumentationProvider.GetDocumentation(type);
             }
 
             return documentation;
@@ -272,7 +275,7 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
             foreach (Attribute attribute in attributes)
             {
                 Func<object, string> textGenerator;
-                if (AnnotationTextGenerator.TryGetValue(attribute.GetType(), out textGenerator))
+                if (this.AnnotationTextGenerator.TryGetValue(attribute.GetType(), out textGenerator))
                 {
                     annotations.Add(
                         new ParameterAnnotation
@@ -308,7 +311,7 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
 
         private CollectionModelDescription GenerateCollectionModelDescription(Type modelType, Type elementType)
         {
-            ModelDescription collectionModelDescription = GetOrCreateModelDescription(elementType);
+            ModelDescription collectionModelDescription = this.GetOrCreateModelDescription(elementType);
             if (collectionModelDescription != null)
             {
                 return new CollectionModelDescription
@@ -328,10 +331,10 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
             {
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
-                Documentation = CreateDefaultDocumentation(modelType)
+                Documentation = this.CreateDefaultDocumentation(modelType)
             };
 
-            GeneratedModels.Add(complexModelDescription.Name, complexModelDescription);
+            this.GeneratedModels.Add(complexModelDescription.Name, complexModelDescription);
             bool hasDataContractAttribute = modelType.GetCustomAttribute<DataContractAttribute>() != null;
             PropertyInfo[] properties = modelType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (PropertyInfo property in properties)
@@ -343,14 +346,14 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                         Name = GetMemberName(property, hasDataContractAttribute)
                     };
 
-                    if (DocumentationProvider != null)
+                    if (this.DocumentationProvider != null)
                     {
-                        propertyModel.Documentation = DocumentationProvider.GetDocumentation(property);
+                        propertyModel.Documentation = this.DocumentationProvider.GetDocumentation(property);
                     }
 
-                    GenerateAnnotations(property, propertyModel);
+                    this.GenerateAnnotations(property, propertyModel);
                     complexModelDescription.Properties.Add(propertyModel);
-                    propertyModel.TypeDescription = GetOrCreateModelDescription(property.PropertyType);
+                    propertyModel.TypeDescription = this.GetOrCreateModelDescription(property.PropertyType);
                 }
             }
 
@@ -364,13 +367,13 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                         Name = GetMemberName(field, hasDataContractAttribute)
                     };
 
-                    if (DocumentationProvider != null)
+                    if (this.DocumentationProvider != null)
                     {
-                        propertyModel.Documentation = DocumentationProvider.GetDocumentation(field);
+                        propertyModel.Documentation = this.DocumentationProvider.GetDocumentation(field);
                     }
 
                     complexModelDescription.Properties.Add(propertyModel);
-                    propertyModel.TypeDescription = GetOrCreateModelDescription(field.FieldType);
+                    propertyModel.TypeDescription = this.GetOrCreateModelDescription(field.FieldType);
                 }
             }
 
@@ -379,8 +382,8 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
 
         private DictionaryModelDescription GenerateDictionaryModelDescription(Type modelType, Type keyType, Type valueType)
         {
-            ModelDescription keyModelDescription = GetOrCreateModelDescription(keyType);
-            ModelDescription valueModelDescription = GetOrCreateModelDescription(valueType);
+            ModelDescription keyModelDescription = this.GetOrCreateModelDescription(keyType);
+            ModelDescription valueModelDescription = this.GetOrCreateModelDescription(valueType);
 
             return new DictionaryModelDescription
             {
@@ -397,7 +400,7 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
             {
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
-                Documentation = CreateDefaultDocumentation(modelType)
+                Documentation = this.CreateDefaultDocumentation(modelType)
             };
             bool hasDataContractAttribute = modelType.GetCustomAttribute<DataContractAttribute>() != null;
             foreach (FieldInfo field in modelType.GetFields(BindingFlags.Public | BindingFlags.Static))
@@ -409,22 +412,22 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
                         Name = field.Name,
                         Value = field.GetRawConstantValue().ToString()
                     };
-                    if (DocumentationProvider != null)
+                    if (this.DocumentationProvider != null)
                     {
-                        enumValue.Documentation = DocumentationProvider.GetDocumentation(field);
+                        enumValue.Documentation = this.DocumentationProvider.GetDocumentation(field);
                     }
                     enumDescription.Values.Add(enumValue);
                 }
             }
-            GeneratedModels.Add(enumDescription.Name, enumDescription);
+            this.GeneratedModels.Add(enumDescription.Name, enumDescription);
 
             return enumDescription;
         }
 
         private KeyValuePairModelDescription GenerateKeyValuePairModelDescription(Type modelType, Type keyType, Type valueType)
         {
-            ModelDescription keyModelDescription = GetOrCreateModelDescription(keyType);
-            ModelDescription valueModelDescription = GetOrCreateModelDescription(valueType);
+            ModelDescription keyModelDescription = this.GetOrCreateModelDescription(keyType);
+            ModelDescription valueModelDescription = this.GetOrCreateModelDescription(valueType);
 
             return new KeyValuePairModelDescription
             {
@@ -441,9 +444,9 @@ namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
             {
                 Name = ModelNameHelper.GetModelName(modelType),
                 ModelType = modelType,
-                Documentation = CreateDefaultDocumentation(modelType)
+                Documentation = this.CreateDefaultDocumentation(modelType)
             };
-            GeneratedModels.Add(simpleModelDescription.Name, simpleModelDescription);
+            this.GeneratedModels.Add(simpleModelDescription.Name, simpleModelDescription);
 
             return simpleModelDescription;
         }

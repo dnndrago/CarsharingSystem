@@ -1,4 +1,4 @@
-namespace BugTracker.RestServices.Areas.HelpPage
+namespace CarsharingSystem.WebServices.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

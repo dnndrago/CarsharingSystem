@@ -15,15 +15,12 @@ namespace CarsharingSystem.Model
             this.categories = new HashSet<DrivingLicenseCategories>();
         }
 
-        [Key]
         public Guid Id { get; set; }
 
-        [Required]
         public Guid DriverId { get; set; }
 
         public virtual Driver Driver { get; set; }
 
-        [Required]
         public string LicenseNumber { get; set; }
 
         public virtual ICollection<DrivingLicenseCategories> Categories

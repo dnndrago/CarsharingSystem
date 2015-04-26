@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
+namespace CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions
 {
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+
     public class ParameterDescription
     {
         public ParameterDescription()

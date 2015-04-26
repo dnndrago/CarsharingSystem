@@ -1,10 +1,10 @@
-using System;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-
-namespace BugTracker.RestServices.Areas.HelpPage.ModelDescriptions
+namespace CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+
     internal static class ModelNameHelper
     {
         // Modify this to provide custom model name mapping.

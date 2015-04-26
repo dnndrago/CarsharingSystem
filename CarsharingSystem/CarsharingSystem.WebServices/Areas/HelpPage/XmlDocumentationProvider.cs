@@ -5,11 +5,13 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
+using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
-namespace BugTracker.RestServices.Areas.HelpPage
+namespace CarsharingSystem.WebServices.Areas.HelpPage
 {
-    using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

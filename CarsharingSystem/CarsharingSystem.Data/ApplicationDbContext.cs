@@ -30,5 +30,14 @@ namespace CarsharingSystem.Data
         {
             return new ApplicationDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DrivingLicense>()
+              .HasRequired(lu => lu.Driver)
+              .WithOptional(pi => pi.DrivingLicense);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

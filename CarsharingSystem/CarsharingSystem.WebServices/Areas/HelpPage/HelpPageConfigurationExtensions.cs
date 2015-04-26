@@ -1,23 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Description;
-using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
-using BugTracker.RestServices.Areas.HelpPage.Models;
-
-namespace BugTracker.RestServices.Areas.HelpPage
+namespace CarsharingSystem.WebServices.Areas.HelpPage
 {
-    using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
-    using BugTracker.RestServices.Areas.HelpPage.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Web.Http;
+    using System.Web.Http.Controllers;
+    using System.Web.Http.Description;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage;
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+    using CarsharingSystem.WebServices.Areas.HelpPage.Models;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
     public static class HelpPageConfigurationExtensions
     {

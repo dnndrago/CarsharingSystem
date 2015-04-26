@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
+using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
-namespace BugTracker.RestServices.Areas.HelpPage.Models
+namespace CarsharingSystem.WebServices.Areas.HelpPage.Models
 {
-    using BugTracker.RestServices.Areas.HelpPage.ModelDescriptions;
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+
+    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
     /// <summary>
     /// The model that represents an API displayed on the help page.

@@ -2,11 +2,11 @@
 @using System.Web.Http.Controllers
 @using System.Web.Http.Description
 @using System.Collections.ObjectModel
-@using BugTracker.RestServices.Areas.HelpPage.Models
+@using CarsharingSystem.WebServices.Areas.HelpPage.Models
 @model Collection<ApiDescription>
 
 @{
-    ViewBag.Title = "Bug Tracker REST Services - Web API Help Page";
+    ViewBag.Title = "Carsharing REST Services - Web API Help Page";
 
     // Group APIs by controller
     ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = 
@@ -26,8 +26,7 @@
         <div class="content-wrapper">
             <h2>Introduction</h2>
             <p>
-                Bug Tracker REST Services are designed to manage bugs,
-                comments and users through standard RESTful API.
+                Carsharing REST Services..
             </p>
         </div>
     </section>
