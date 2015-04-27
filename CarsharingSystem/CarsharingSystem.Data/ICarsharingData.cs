@@ -14,6 +14,8 @@ namespace CarsharingSystem.Data
 
         VehicleRepository Vehicles { get; }
 
-        DrivingLicenseRepository DrivingLicenses { get; } 
+        DrivingLicenseRepository DrivingLicenses { get; }
+
+        int SaveChanges();
     }
 }

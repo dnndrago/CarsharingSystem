@@ -45,7 +45,7 @@ namespace CarsharingSystem.Model
             }
         }
 
-        public Guid? DrivingLicenseId { get; set; }
+        public int? DrivingLicenseId { get; set; }
 
         public virtual DrivingLicense DrivingLicense { get; set; }
     }

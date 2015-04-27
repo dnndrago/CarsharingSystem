@@ -50,6 +50,11 @@ namespace CarsharingSystem.Data
             get { return (DrivingLicenseRepository)this.GetRepository<DrivingLicense>(); }
         }
 
+        public int SaveChanges()
+        {
+            return this.context.SaveChanges();
+        }
+
         private IRepository<T> GetRepository<T>() where T : class
         {
             var type = typeof(T);

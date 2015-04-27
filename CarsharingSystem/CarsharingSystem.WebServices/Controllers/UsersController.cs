@@ -1,5 +1,6 @@
 ﻿namespace CarsharingSystem.WebServices.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -64,6 +65,8 @@
                         };
                 break;
             }
+
+            user.RegistrationDate = DateTime.Now;
 
             var identityResult = await this.UserManager.CreateAsync(user, model.Password);
 

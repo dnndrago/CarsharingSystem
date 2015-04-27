@@ -4,18 +4,16 @@ namespace CarsharingSystem.Model
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public class DrivingLicense
     {
-        private ICollection<DrivingLicenseCategories> categories; 
-
         public DrivingLicense()
         {
-            this.Id = Guid.NewGuid();
-            this.categories = new HashSet<DrivingLicenseCategories>();
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public Guid DriverId { get; set; }
 
@@ -23,18 +21,18 @@ namespace CarsharingSystem.Model
 
         public string LicenseNumber { get; set; }
 
-        public virtual ICollection<DrivingLicenseCategories> Categories
+        [NotMapped]
+        public virtual ICollection<Category> Categories
         {
             get
             {
-                return this.categories;
-            }
+                var categories = this.DrivingLicenseCategories.Split(',');
 
-            set
-            {
-                this.categories = value;
+                return categories.Select(category => (Category)Enum.Parse(typeof(Category), category)).ToList();
             }
         }
+
+        public string DrivingLicenseCategories { get; set; }
 
         [Required]
         public DateTime ExpiryDate { get; set; }

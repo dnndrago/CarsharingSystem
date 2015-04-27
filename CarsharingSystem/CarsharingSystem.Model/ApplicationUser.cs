@@ -1,6 +1,7 @@
 ﻿
 namespace CarsharingSystem.Model
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace CarsharingSystem.Model
     public abstract class ApplicationUser : IdentityUser
     {
         public int Raiting { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
             UserManager<ApplicationUser> manager, string authenticationType)

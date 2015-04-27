@@ -53,9 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="DrivingLicense.cs" />
-    <Compile Include="DrivingLicenseCategories.cs" />
     <Compile Include="Passenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Travel.cs" />

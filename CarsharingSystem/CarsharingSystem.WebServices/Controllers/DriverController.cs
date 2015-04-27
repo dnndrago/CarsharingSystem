@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 using CarsharingSystem.Model;
 using CarsharingSystem.Data;
 
 namespace CarsharingSystem.WebServices.Controllers
 {
+    using CarsharingSystem.WebServices.Models;
+
+    using Microsoft.AspNet.Identity;
+
     [RoutePrefix("api")]
     public class DriverController : ApiController
     {
@@ -28,13 +24,65 @@ namespace CarsharingSystem.WebServices.Controllers
             this.db = data;
         }
 
-        // GET api/Driver
+        // POST api/Driver/DrivingLicense
         [Authorize]
-        [HttpGet]
-        [Route("Drivers")]
-        public IHttpActionResult GetDrivers()
+        [HttpPost]
+        [Route("Drivers/DrivingLicense")]
+        public IHttpActionResult PostDriverDrivingLicense(DrivingLicenseInputModel inputModel)
         {
-            return null;
+            if (inputModel == null)
+            {
+                return this.BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest(ModelState);
+            }
+
+            var currentDriverId = User.Identity.GetUserId();
+            var user = this.db.Drivers.Find(currentDriverId);
+
+            if (user == null)
+            {
+                return this.BadRequest();
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(inputModel.Categories))
+            {
+                var allCategories = inputModel.Categories.Split(',');
+                foreach (var category in allCategories)
+                {
+                    Category cat;
+                    if (!Enum.TryParse(category, out cat))
+                    {
+                        return this.BadRequest();
+                    }
+                }
+            }
+
+            var drivingLicenseToBeAdded = new DrivingLicense
+                {
+                    LicenseNumber = inputModel.LicenseNumber,
+                    ExpiryDate = inputModel.ExpiryDate,
+                    DriverId = new Guid(currentDriverId),
+                    Driver = user,
+                    DrivingLicenseCategories = inputModel.Categories
+                };
+
+            user.DrivingLicense = drivingLicenseToBeAdded;
+            this.db.DrivingLicenses.Add(drivingLicenseToBeAdded);
+            this.db.SaveChanges();
+
+            return this.CreatedAtRoute(
+                    "DefaultApi",
+                    new { controller = "DrivingLicense", id = drivingLicenseToBeAdded.Id },
+                    new
+                    {
+                        Id = drivingLicenseToBeAdded.Id,
+                        Message = "Driving licesed was succesfully added."
+                    }
+                    );
         }
 
     //    // GET api/Driver/5
