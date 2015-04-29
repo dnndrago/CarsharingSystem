@@ -1,16 +1,13 @@
-using System;
-using System.Web.Http;
-using System.Web.Mvc;
-using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
-using CarsharingSystem.WebServices.Areas.HelpPage.Models;
+
 
 namespace CarsharingSystem.WebServices.Areas.HelpPage.Controllers
 {
+    using System;
+    using System.Web.Http;
+    using System.Web.Mvc;
+
     using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
     using CarsharingSystem.WebServices.Areas.HelpPage.Models;
-
-    using CarsharingSystem.WebServices.Areas.HelpPage;
-    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
     /// <summary>
     /// The controller that will handle requests for the help page.

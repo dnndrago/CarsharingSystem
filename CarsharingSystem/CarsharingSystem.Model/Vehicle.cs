@@ -12,7 +12,9 @@ namespace CarsharingSystem.Model
 
         public Guid Id { get; set; }
 
-        public Guid DriverGuid { get; set; }
+        public Guid DriverId { get; set; }
+
+        public virtual Driver Driver { get; set; }
 
         public DateTime ManufactureDate { get; set; }
 

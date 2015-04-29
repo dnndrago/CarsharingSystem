@@ -1,20 +1,19 @@
-﻿namespace CarsharingSystem.WebServices.Controllers
+﻿
+namespace CarsharingSystem.WebServices.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Web.Http;
 
     using CarsharingSystem.Data;
     using CarsharingSystem.Model;
     using CarsharingSystem.WebServices.Models;
 
     using Microsoft.AspNet.Identity;
-    using System.Web.Http;
-
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Testing;
-
 
     [System.Web.Http.Authorize]
     [RoutePrefix("api/user")]

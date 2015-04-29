@@ -1,3 +1,4 @@
+
 namespace CarsharingSystem.WebServices.Areas.HelpPage
 {
     using System;
@@ -14,12 +15,9 @@ namespace CarsharingSystem.WebServices.Areas.HelpPage
     using System.Web.Http.Controllers;
     using System.Web.Http.Description;
 
-    using CarsharingSystem.WebServices.Areas.HelpPage;
     using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
     using CarsharingSystem.WebServices.Areas.HelpPage.Models;
-
-    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
-
+    
     public static class HelpPageConfigurationExtensions
     {
         private const string ApiModelPrefix = "MS_HelpPageApiModel_";

@@ -13,7 +13,7 @@ namespace CarsharingSystem.Model
 
         public Guid Id { get; set; }
 
-        public Guid DriverId { get; set; }
+        public string DriverId { get; set; }
 
         public virtual Driver Driver { get; set; }
 
@@ -21,6 +21,14 @@ namespace CarsharingSystem.Model
 
         public Guid VehicleId { get; set; }
 
-        public virtual Vehicle Vehicle { get; set; }    
+        public virtual Vehicle Vehicle { get; set; }
+
+        public TravelStatus Status { get; set; }
+
+        public DateTime TravelDate { get; set; }
+
+        public string FromDestination { get; set; }
+
+        public string ToDestionation { get; set; }
     }
 }

@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net.Http.Headers;
-using System.Web.Http.Description;
-using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 
 namespace CarsharingSystem.WebServices.Areas.HelpPage.Models
 {
-    using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Net.Http.Headers;
+    using System.Web.Http.Description;
 
     using CarsharingSystem.WebServices.Areas.HelpPage.ModelDescriptions;
 

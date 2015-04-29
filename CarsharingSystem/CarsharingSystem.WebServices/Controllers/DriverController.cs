@@ -85,7 +85,44 @@ namespace CarsharingSystem.WebServices.Controllers
                     );
         }
 
-    //    // GET api/Driver/5
+        // POST api/Drivers/Vehicle
+        [Authorize]
+        [HttpPost]
+        [Route("Drivers/Vehicle")]
+        public IHttpActionResult PostDriverVehicle(VehicleInputModel inputModel)
+        {
+            if (inputModel == null)
+            {
+                return this.BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            var currentDriverId = this.User.Identity.GetUserId();
+            var driver = this.db.Drivers.Find(currentDriverId);
+
+            var vehicleToBeAdded = new Vehicle
+                                       {
+                                           DriverId = new Guid(currentDriverId),
+                                           ManufactureDate = inputModel.ManufactureDate,
+                                           VehicleType = inputModel.VehicleType,
+                                           Seats = inputModel.Seats,
+                                           Run = inputModel.Run
+                                       };
+
+            driver.Vehicles.Add(vehicleToBeAdded);
+
+            this.db.SaveChanges();
+
+            return this.CreatedAtRoute(
+                "DefaultApi",
+                new { controller = "Vehicles", id = vehicleToBeAdded.Id },
+                new { Id = vehicleToBeAdded.Id, Message = "Vehicle was succesfully added." });
+        }
+
+        //    // GET api/Driver/5
     //    [ResponseType(typeof(Driver))]
     //    public IHttpActionResult GetDriver(string id)
     //    {

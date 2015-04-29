@@ -37,6 +37,16 @@ namespace CarsharingSystem.Data
               .HasRequired(lu => lu.Driver)
               .WithOptional(pi => pi.DrivingLicense);
 
+            modelBuilder.Entity<Travel>()
+                   .HasMany<Passenger>(t => t.Passengers)
+                   .WithMany(p => p.Travels)
+                   .Map(tp =>
+                   {
+                      tp.MapLeftKey("TravelId");
+                      tp.MapRightKey("PassengerId");
+                      tp.ToTable("TravelPassenger");
+                   });
+
             base.OnModelCreating(modelBuilder);
         }
     }

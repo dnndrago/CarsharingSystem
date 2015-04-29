@@ -10,7 +10,9 @@ namespace CarsharingSystem.Model
 
     public abstract class ApplicationUser : IdentityUser
     {
-        public int Raiting { get; set; }
+        public int? Raiting { get; set; }
+
+        public int? Votes { get; set; }
 
         public DateTime RegistrationDate { get; set; }
 

@@ -16,6 +16,14 @@ namespace CarsharingSystem.Data.Repositories
             this.set = context.Set<T>();
         }
 
+        public IDbSet<T> Set
+        {
+            get
+            {
+                return this.set;
+            }
+        } 
+
         public IQueryable<T> All()
         {
             return this.set;

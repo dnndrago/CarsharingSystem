@@ -1,6 +1,10 @@
 ﻿
 namespace CarsharingSystem.Data.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using CarsharingSystem.Model;
 
     public class TravelRepository : GenericRepository<Travel>
@@ -9,5 +13,6 @@ namespace CarsharingSystem.Data.Repositories
             : base(context)
         {
         }
+
     }
 }
