@@ -50,6 +50,11 @@ namespace CarsharingSystem.Data
             get { return (DrivingLicenseRepository)this.GetRepository<DrivingLicense>(); }
         }
 
+        public IRepository<TravelPassenger> TravelPassengers
+        {
+            get { return this.GetRepository<TravelPassenger>(); }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();

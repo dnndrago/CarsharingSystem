@@ -59,6 +59,7 @@
     <Compile Include="Passenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Travel.cs" />
+    <Compile Include="TravelPassenger.cs" />
     <Compile Include="TravelStatus.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleType.cs" />

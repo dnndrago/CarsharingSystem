@@ -16,6 +16,8 @@ namespace CarsharingSystem.Data
 
         DrivingLicenseRepository DrivingLicenses { get; }
 
+        IRepository<TravelPassenger> TravelPassengers {get; }
+
         int SaveChanges();
     }
 }

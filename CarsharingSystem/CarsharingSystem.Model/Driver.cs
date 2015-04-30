@@ -1,17 +1,15 @@
 ﻿
 namespace CarsharingSystem.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("Drivers")]
     public class Driver : ApplicationUser
     {
-        private ICollection<Vehicle> vehicles;
-
+        private ICollection<Vehicle> vehicles; 
         private ICollection<Travel> travels;
-
+        
         public Driver()
         {
             this.Vehicles = new HashSet<Vehicle>();
@@ -30,7 +28,6 @@ namespace CarsharingSystem.Model
                 this.vehicles = value;
             }
         }
-
 
         public virtual ICollection<Travel> Travels
         {

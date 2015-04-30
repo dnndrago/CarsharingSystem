@@ -2,7 +2,6 @@
 namespace CarsharingSystem.WebServices.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     using CarsharingSystem.Model;
 

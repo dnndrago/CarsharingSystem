@@ -13,7 +13,7 @@ namespace CarsharingSystem.Data
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public IDbSet<Driver> Drivers { get; set; }
@@ -26,6 +26,8 @@ namespace CarsharingSystem.Data
 
         public IDbSet<DrivingLicense> DrivingLicenses { get; set; }
 
+        public IDbSet<TravelPassenger> TravelPassengers { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -33,20 +35,17 @@ namespace CarsharingSystem.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Driver>()
+            .HasKey(d => d.DrivingLicenseId);
+
             modelBuilder.Entity<DrivingLicense>()
               .HasRequired(lu => lu.Driver)
               .WithOptional(pi => pi.DrivingLicense);
 
-            modelBuilder.Entity<Travel>()
-                   .HasMany<Passenger>(t => t.Passengers)
-                   .WithMany(p => p.Travels)
-                   .Map(tp =>
-                   {
-                      tp.MapLeftKey("TravelId");
-                      tp.MapRightKey("PassengerId");
-                      tp.ToTable("TravelPassenger");
-                   });
 
+
+            modelBuilder.Entity<TravelPassenger>().HasKey(si => new { si.TravelId, si.PassengerId });
+            
             base.OnModelCreating(modelBuilder);
         }
     }

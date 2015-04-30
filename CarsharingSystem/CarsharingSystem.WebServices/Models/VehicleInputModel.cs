@@ -7,12 +7,12 @@ namespace CarsharingSystem.WebServices.Models
 
     public class VehicleInputModel
     {
-        public DateTime ManufactureDate { get; set; }
+        public DateTime? ManufactureDate { get; set; }
 
-        public VehicleType VehicleType { get; set; }
+        public VehicleType? VehicleType { get; set; }
 
-        public int Seats { get; set; }
+        public int? Seats { get; set; }
 
-        public int Run { get; set; }
+        public int? Run { get; set; }
     }
 }

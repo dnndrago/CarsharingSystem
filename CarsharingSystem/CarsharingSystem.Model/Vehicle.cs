@@ -2,7 +2,7 @@
 namespace CarsharingSystem.Model
 {
     using System;
-
+    
     public class Vehicle
     {
         public Vehicle()
@@ -12,7 +12,7 @@ namespace CarsharingSystem.Model
 
         public Guid Id { get; set; }
 
-        public Guid DriverId { get; set; }
+        public string DriverId { get; set; }
 
         public virtual Driver Driver { get; set; }
 

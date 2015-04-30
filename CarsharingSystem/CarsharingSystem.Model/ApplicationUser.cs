@@ -2,6 +2,7 @@
 namespace CarsharingSystem.Model
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -10,7 +11,12 @@ namespace CarsharingSystem.Model
 
     public abstract class ApplicationUser : IdentityUser
     {
-        public int? Raiting { get; set; }
+        public ApplicationUser()
+        {
+        }
+
+        [Range(0, 10)]
+        public decimal? Raiting { get; set; }
 
         public int? Votes { get; set; }
 
@@ -24,5 +30,7 @@ namespace CarsharingSystem.Model
             // Add custom user claims here
             return userIdentity;
         }
+        
+
     }
 }

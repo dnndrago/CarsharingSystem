@@ -14,5 +14,21 @@ namespace CarsharingSystem.Data.Repositories
         {
         }
 
+
+        public IQueryable<Travel> GetTravelsByStartCity(string startPoint)
+        {
+            return this.Set.Where(t => t.FromDestination == startPoint);
+        }
+
+        public IQueryable<Travel> GetTravelsByEndCity(string endPoint)
+        {
+            return this.Set.Where(t => t.ToDestionation == endPoint);
+        }
+
+        public IQueryable<Travel> GetTravelsByDate(DateTime date)
+        {
+            return this.Set.Where(t => t.TravelDate == date);
+        }
+
     }
 }

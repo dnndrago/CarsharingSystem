@@ -65,13 +65,15 @@ namespace CarsharingSystem.WebServices.Controllers
                 {
                     LicenseNumber = inputModel.LicenseNumber,
                     ExpiryDate = inputModel.ExpiryDate,
-                    DriverId = new Guid(currentDriverId),
+                    DriverId = currentDriverId,
                     Driver = user,
                     DrivingLicenseCategories = inputModel.Categories
                 };
 
-            user.DrivingLicense = drivingLicenseToBeAdded;
             this.db.DrivingLicenses.Add(drivingLicenseToBeAdded);
+            this.db.SaveChanges();
+
+            user.DrivingLicenseId = drivingLicenseToBeAdded.Id;
             this.db.SaveChanges();
 
             return this.CreatedAtRoute(
@@ -105,11 +107,11 @@ namespace CarsharingSystem.WebServices.Controllers
 
             var vehicleToBeAdded = new Vehicle
                                        {
-                                           DriverId = new Guid(currentDriverId),
-                                           ManufactureDate = inputModel.ManufactureDate,
-                                           VehicleType = inputModel.VehicleType,
-                                           Seats = inputModel.Seats,
-                                           Run = inputModel.Run
+                                           DriverId = currentDriverId,
+                                           ManufactureDate = inputModel.ManufactureDate.Value,
+                                           VehicleType = inputModel.VehicleType.Value,
+                                           Seats = inputModel.Seats.Value,
+                                           Run = inputModel.Run.Value
                                        };
 
             driver.Vehicles.Add(vehicleToBeAdded);

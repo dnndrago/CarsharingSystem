@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 public enum Category
 {
     A,

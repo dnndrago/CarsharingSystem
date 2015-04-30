@@ -1,9 +1,11 @@
 ﻿
 namespace CarsharingSystem.WebServices.Controllers
 {
+    using System;
     using System.Web.Http;
 
     using CarsharingSystem.Data;
+    using CarsharingSystem.WebServices.Models;
 
     [RoutePrefix("api")]
     public class VehiclesController : ApiController
@@ -25,7 +27,7 @@ namespace CarsharingSystem.WebServices.Controllers
         [Route("vehicles/{id}")]
         public IHttpActionResult GetDriverVehicle(string id)
         {
-            var vehicle = this.db.Vehicles.Find(id);
+            var vehicle = this.db.Vehicles.Find(new Guid(id));
 
             if (vehicle == null)
             {
@@ -43,6 +45,32 @@ namespace CarsharingSystem.WebServices.Controllers
             };
 
             return this.Ok(result);
+        }
+
+        // PUT api/vehicles/1
+        [Authorize]
+        [HttpPut]
+        [Route("vehicles/{id}")]
+        public IHttpActionResult PutDriverVehicle(VehicleInputModel inputModel, string id)
+        {
+            var vehicle = this.db.Vehicles.Find(new Guid(id));
+
+            if (vehicle == null)
+            {
+                return this.NotFound();
+            }
+
+            vehicle.ManufactureDate = inputModel.ManufactureDate ?? vehicle.ManufactureDate;
+            vehicle.Run = inputModel.Run ?? vehicle.Run;
+            vehicle.Seats = inputModel.Seats ?? vehicle.Seats;
+            vehicle.VehicleType = inputModel.VehicleType ?? vehicle.VehicleType;
+
+            this.db.SaveChanges();
+
+            return this.Ok(new
+            {
+                Message = string.Format("Vehicle with id: {0} was modiefied", vehicle.Id)
+            });
         }
     }
 }

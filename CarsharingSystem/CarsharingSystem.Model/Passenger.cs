@@ -7,14 +7,14 @@ namespace CarsharingSystem.Model
     [Table("Passengers")]
     public class Passenger : ApplicationUser
     {
-        private ICollection<Travel> travels;
+        private ICollection<TravelPassenger> travels;
 
         public Passenger()
         {
-            this.travels = new HashSet<Travel>();
+            this.travels = new HashSet<TravelPassenger>();
         }
 
-        public virtual ICollection<Travel> Travels
+        public virtual ICollection<TravelPassenger> Travels
         {
             get
             {

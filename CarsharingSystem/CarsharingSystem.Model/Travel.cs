@@ -9,6 +9,7 @@ namespace CarsharingSystem.Model
         public Travel()
         {
             this.Id = Guid.NewGuid();
+            this.Passengers = new HashSet<TravelPassenger>();
         }
 
         public Guid Id { get; set; }
@@ -17,7 +18,7 @@ namespace CarsharingSystem.Model
 
         public virtual Driver Driver { get; set; }
 
-        public virtual ICollection<Passenger> Passengers { get; set; }
+        public virtual ICollection<TravelPassenger> Passengers { get; set; }
 
         public Guid VehicleId { get; set; }
 

@@ -65,12 +65,13 @@ namespace CarsharingSystem.WebServices.Controllers
 
             var result = new TravelOutputModel
                 {
-                    DriverId = travel.DriverId.ToString(),
+                    DriverId = travel.DriverId,
                     VehicleId = travel.VehicleId.ToString(),
                     Status = travel.Status.ToString(),
                     TravelDate = travel.TravelDate,
                     DestinationFrom = travel.FromDestination,
-                    DestinationTo = travel.ToDestionation
+                    DestinationTo = travel.ToDestionation,
+                    PassengerIds = travel.Passengers.Select(p => p.PassengerId.ToString()).ToList()
                 };
 
             return this.Ok(result);
@@ -89,7 +90,7 @@ namespace CarsharingSystem.WebServices.Controllers
                 return this.NotFound();
             }
 
-            var result = travel.Passengers.Select(p => new { p.Id, p.UserName, p.Raiting }).ToList();
+            var result = travel.Passengers.Select(p => new { p.PassengerId, p.Passenger.UserName, p.Passenger.Raiting }).ToList();
 
             return this.Ok(result);
         }
@@ -223,12 +224,20 @@ namespace CarsharingSystem.WebServices.Controllers
                 return this.NotFound();
             }
 
-            if (travel.Passengers.Contains(passenger))
+            if (travel.Passengers.Any(p => p.PassengerId == passenger.Id))
             {
                 return this.BadRequest("Cannot add a passenger multiple times to a single travelModel.");
             }
 
-            travel.Passengers.Add(passenger);
+
+            var travelPassenger = new TravelPassenger
+                                {
+                                    PassengerId = passenger.Id, 
+                                    TravelId = travel.Id, 
+                                    IsVoted = false
+                                };
+
+            this.db.TravelPassengers.Add(travelPassenger);
 
             this.db.SaveChanges();
 
@@ -260,6 +269,49 @@ namespace CarsharingSystem.WebServices.Controllers
             this.db.SaveChanges();
 
             return this.Ok(new { Message = string.Format("Travel with id: {0} was deleted.", id) });
+        }
+
+        // GET api/travels/filter
+        [HttpGet]
+        [Route("travels/filter")]
+        public IHttpActionResult GetTravelsByFilter([FromUri] string startPoint = null, [FromUri] string endPoint = null, [FromUri] DateTime? date = null)
+        {
+            var travels = this.db.Travels.All();
+
+            if (startPoint != null)
+            {
+                var travelsByStartCity = this.db.Travels.GetTravelsByStartCity(startPoint);
+
+                travels = travels.Intersect(travelsByStartCity);
+            }
+
+            if (endPoint != null)
+            {
+                var travelsByEndCity = this.db.Travels.GetTravelsByEndCity(endPoint);
+
+                travels = travels.Intersect(travelsByEndCity);
+            }
+
+            if (date.HasValue)
+            {
+                var travelsByDate = this.db.Travels.GetTravelsByDate(date.Value);
+
+                travels = travels.Intersect(travelsByDate);
+            }
+
+            return this.Ok(
+                travels
+                .Select(t => new TravelOutputModel 
+                        {
+                            DriverId = t.DriverId,
+                            TravelDate = t.TravelDate,
+                            DestinationFrom = t.FromDestination,
+                            DestinationTo = t.ToDestionation,
+                            Status = t.Status.ToString(),
+                            VehicleId = t.VehicleId.ToString(),
+                            PassengerIds = t.Passengers.Select(p => p.PassengerId.ToString()).ToList()
+                        })
+                .ToList());
         }
     }
 }

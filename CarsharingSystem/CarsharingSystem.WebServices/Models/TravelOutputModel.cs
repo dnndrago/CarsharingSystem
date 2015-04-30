@@ -2,10 +2,13 @@
 namespace CarsharingSystem.WebServices.Models
 {
     using System;
+    using System.Collections.Generic;
 
     public class TravelOutputModel
     {
         public string DriverId { get; set; }
+
+        public List<string> PassengerIds { get; set; }
 
         public string VehicleId { get; set; }
 
